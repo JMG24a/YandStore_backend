@@ -19,8 +19,6 @@ class Products{
       priceMax
     } = query
 
-    console.log('min|max parameters: !!!!!!',priceMin,priceMax)
-
     if(limit && offset){
       options.limit = limit,
       options.offset = offset
