@@ -7,7 +7,9 @@ const config = {
   dbPassword: process.env.DB_PASSWORD,
   dbHost: process.env.DB_HOST,
   dbName: process.env.DB_NAME,
-  dbPort: process.env.DB_PORT
+  dbPort: process.env.DB_PORT,
+  AD_001: process.env.ACCESS_DOMAIN_001,
+  AD_002: process.env.ACCESS_DOMAIN_002,
 }
 
 
