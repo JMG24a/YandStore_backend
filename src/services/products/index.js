@@ -36,8 +36,8 @@ class Products{
   }
 
   findOne(id){
-    const product = this.products.find(item => item.id === id)
-    if(product === undefined){
+    const product = models.Product.findByPk(id)
+    if(!product){
       throw boom.notFound('product not fount')
     }
     return product

@@ -27,17 +27,17 @@ const OrderSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  total: { //NOTA: se coloca despues de las migrations o si no habra errores
-    type: DataTypes.VIRTUAL, //NOTA No es recomendable esta practica para grandes cantidades de datos
-    get() {
-      if (this.items.length > 0) {
-        return this.items.reduce((total, item) => {
-          return total + (item.price * item.OrderProduct.amount);
-        }, 0);
-      }
-      return 0;
-    }
-  }
+  // total: { //NOTA: se coloca despues de las migrations o si no habra errores debido a que sql no existe tipo virtual
+  //   type: DataTypes.VIRTUAL, //NOTA No es recomendable esta practica para grandes cantidades de datos
+  //   get() {
+  //     if (this.items.length > 0) {
+  //       return this.items.reduce((total, item) => {
+  //         return total + (item.price * item.OrderProduct.amount);
+  //       }, 0);
+  //     }
+  //     return 0;
+  //   }
+  // }
 }
 
 class Order extends Model{
