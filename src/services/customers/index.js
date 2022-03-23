@@ -1,5 +1,6 @@
 const { models } = require('../../libs/sequelize');
 const boom = require('@hapi/boom');
+const {security, security_confirm} = require('../../middleware/securities')
 
 class Customer{
 
@@ -21,10 +22,20 @@ class Customer{
   }
 
   async create(data) {
+    data.user.password = await security(data.user.password)
     const newCustomer = await models.Customer.create(data, {
       include: ['user']
     });
     return newCustomer;
+  }
+
+  async auth(data) {
+    const customer = await this.findOne(data.id)
+    const isAuth = await security_confirm(data.password, customer.password)
+    if(!isAuth){
+      throw boom.conflict('User or Password incorrect')
+    }
+    return isAuth;
   }
 
   async update(id, changes) {

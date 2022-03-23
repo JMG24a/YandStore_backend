@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const appRouter = require('./router');
 const cors = require('cors')
 const { logErrors, boomErrorHandler, ormErrorHandler ,errorHandler } = require('./middleware/error')
-
+const { validatorToken } = require('./middleware/tokens')
 const { AD_001, AD_002: yardStore } = config
 
 const app = express();
@@ -28,8 +28,9 @@ const options = {
 
 app.use(cors(options));
 
-app.get('/',(request,response)=>{
-  response.send('Home')
+app.get('/', validatorToken,
+  (request,response)=>{
+    response.send('Home')
 });
 
 appRouter(app)

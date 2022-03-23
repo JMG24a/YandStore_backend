@@ -226,3 +226,5 @@ mysql.js
 thisNot
 ModificarMigracion.js
 docker-compose-test.yml
+#archivo de la clase auth
+pass-hash.js
