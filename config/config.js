@@ -11,8 +11,10 @@ const config = {
   dbPort: process.env.DB_PORT,
   AD_001: process.env.ACCESS_DOMAIN_001,
   AD_002: process.env.ACCESS_DOMAIN_002,
-  DB_URL: process.env.DATABASE_URL
+  DB_URL: process.env.DATABASE_URL,
+  tokenKey: process.env.TOKEN,
+  smtp_u: process.env.SMTP_USER,
+  smtp_p: process.env.SMTP_PASSWORD
 }
-
 
 module.exports = {config}
