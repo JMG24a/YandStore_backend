@@ -1,8 +1,9 @@
 const { models } = require('../../libs/sequelize');
 const boom = require('@hapi/boom');
 const {security_confirm} = require('../../middleware/securities')
-const { createJWT } = require('../../../auth/tokens');
+const { createJWT, verifyJWT } = require('../../../auth/tokens');
 const { sendMail } = require('../../../mails/recovery')
+const { security } = require('../../middleware/securities')
 const UserServices = require('../users')
 
 const US = new UserServices()
@@ -65,6 +66,23 @@ class Auth{
       throw boom.internal('try again later')
     }
 
+  }
+
+  async changePassword(token, password){
+
+    const payload = verifyJWT(token);
+    const user = await US.findOne(payload.sub)
+
+    if(token !== user.recoveryToken){
+      throw boom.conflict('invalid credential')
+    }
+
+    const HASH = await security(password)
+    const responseUpdate = await US.update(user.id,{recoveryToken: null, password: HASH})
+
+    delete responseUpdate.dataValues.password
+
+    return responseUpdate
   }
 
 }

@@ -7,4 +7,9 @@ const createJWT = (payload, options={}) => {
   return JWT.sign(payload, secret, options)
 }
 
-module.exports = { createJWT }
+const verifyJWT = (token) => {
+  const rpt =  JWT.verify(token, secret)
+  return rpt
+}
+
+module.exports = { createJWT, verifyJWT }

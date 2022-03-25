@@ -31,4 +31,15 @@ router.post('/recovery',
     }
 })
 
+router.post('/recovery/password',
+  async(req,res,next)=>{
+    try{
+      const {token, password} = req.body;
+      const success = await services.changePassword(token,password)
+      res.json(success)
+    }catch(err){
+      next(err)
+    }
+})
+
 module.exports = router
