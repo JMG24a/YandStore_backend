@@ -27,6 +27,8 @@ const options = {
 }
 
 app.use(cors(options));
+require('../auth')
+
 
 app.get('/', validatorToken,
   (request,response)=>{
