@@ -228,3 +228,6 @@ ModificarMigracion.js
 docker-compose-test.yml
 #archivo de la clase auth
 pass-hash.js
+jwt.js
+role.js
+nodemailer.js
