@@ -22,6 +22,25 @@ class Order{
     return res
   }
 
+  async findByCustomer(id){
+    const res = await models.Order.findAll({
+      where: {
+        '$customer.user.id$': id
+      },
+      include:[
+        {
+          association: 'customer',
+          include: ['user']
+        },
+      ]
+    });
+    if(!res){
+      throw boom.notFound('order not fount')
+    }
+    return res
+  }
+
+
   async create(data){
     const newOrder = await models.Order.create(data)
     return{
