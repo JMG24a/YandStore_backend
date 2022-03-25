@@ -1,11 +1,14 @@
 const { Router } = require('express');
+const passport = require('passport')
 const validatorHandler = require('../../middleware/validator');
-const { getCategoriesSchema, createCategorySchema } = require('../../schemas/categories')
-const CategoriesServices = require('../../services/categories')
+const { validatorRoles } = require('../../middleware/validator/roles');
+const { getCategoriesSchema, createCategorySchema } = require('../../schemas/categories');
+const CategoriesServices = require('../../services/categories');
 const router = Router()
 const services = new CategoriesServices()
 
 router.get('/',
+  passport.authenticate('jwt', {session: false}),
   async(req,res,next)=>{
     try {
       const success = await services.find()
@@ -29,6 +32,8 @@ router.get('/category/:id',
 })
 
 router.post('/',
+  passport.authenticate('jwt', {session: false}),
+  validatorRoles(['admin','seller']),
   validatorHandler(createCategorySchema, 'body'),
   async(req,res,next)=>{
     try{

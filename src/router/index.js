@@ -4,6 +4,7 @@ const productsRouter = require('./products');
 const categoriesRouter = require('./categories');
 const customersRouter = require('./customers');
 const ordersRouter = require('./orders');
+const authRouter = require('./auths');
 
 
 const appRouter = (app) =>{
@@ -14,6 +15,7 @@ const appRouter = (app) =>{
   router.use('/categories', categoriesRouter);
   router.use('/customers', customersRouter);
   router.use('/orders', ordersRouter);
+  router.use('/auth', authRouter)
 
 
   //gestionar rutas para diferentes dispositivos o modificaciones
