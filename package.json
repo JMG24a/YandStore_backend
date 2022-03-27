@@ -14,7 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "jose <jmg24a@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
